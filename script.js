@@ -46,6 +46,61 @@ display.value="Error";
 }
 
 }
+function square(){
+
+let value=Number(display.value);
+
+display.value=value*value;
+
+}
+
+
+
+function cube(){
+
+let value=Number(display.value);
+
+display.value=value*value*value;
+
+}
+
+
+
+function power(){
+
+let base=Number(display.value);
+
+let exponent=prompt("Power value:");
+
+display.value=Math.pow(base,exponent);
+
+}
+
+
+
+
+function toggleTheme(){
+
+document.body.classList.toggle("light");
+
+
+let mode=document.body.classList.contains("light");
+
+
+localStorage.setItem(
+"theme",
+mode?"light":"dark"
+);
+
+}
+
+
+
+if(localStorage.getItem("theme")==="light"){
+
+document.body.classList.add("light");
+
+}
 
 
 
