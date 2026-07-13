@@ -1,14 +1,41 @@
 let display=document.getElementById("display");
 
-let historyText=document.getElementById("history");
+let sound=true;
+
+
+
+function clickEffect(){
+
+if(sound){
+
+let audio=new Audio(
+"https://www.soundjay.com/buttons/sounds/button-16.mp3"
+);
+
+audio.play();
+
+}
+
+
+if(navigator.vibrate){
+
+navigator.vibrate(30);
+
+}
+
+}
+
 
 
 
 function append(value){
 
+clickEffect();
+
 display.value+=value;
 
 }
+
 
 
 
@@ -33,16 +60,11 @@ function calculate(){
 
 try{
 
-let exp=display.value;
+let result=eval(display.value);
 
-let result=eval(exp);
-
-
-historyText.innerHTML=exp;
-
-
-saveHistory(exp+" = "+result);
-
+saveHistory(
+display.value+" = "+result
+);
 
 display.value=result;
 
@@ -62,53 +84,40 @@ display.value="Error";
 
 function scientific(type){
 
-let value=Number(display.value);
-
+let v=Number(display.value);
 
 
 if(type=="sin")
-
-display.value=Math.sin(value*Math.PI/180);
-
+display.value=Math.sin(v*Math.PI/180);
 
 
 if(type=="cos")
-
-display.value=Math.cos(value*Math.PI/180);
-
+display.value=Math.cos(v*Math.PI/180);
 
 
 if(type=="tan")
-
-display.value=Math.tan(value*Math.PI/180);
-
+display.value=Math.tan(v*Math.PI/180);
 
 
 if(type=="sqrt")
-
-display.value=Math.sqrt(value);
-
+display.value=Math.sqrt(v);
 
 
 if(type=="log")
-
-display.value=Math.log10(value);
-
+display.value=Math.log10(v);
 
 
 if(type=="ln")
-
-display.value=Math.log(value);
-
+display.value=Math.log(v);
 
 }
 
 
 
+
 function square(){
 
-display.value=
-Number(display.value)**2;
+display.value=display.value**2;
 
 }
 
@@ -118,12 +127,9 @@ function power(){
 
 let p=prompt("Power");
 
-display.value=
-Math.pow(display.value,p);
+display.value=Math.pow(display.value,p);
 
 }
-
-
 
 
 
@@ -132,15 +138,12 @@ function saveHistory(data){
 let h=
 JSON.parse(localStorage.getItem("history"))||[];
 
-
 h.push(data);
-
 
 localStorage.setItem(
 "history",
 JSON.stringify(h)
 );
-
 
 showHistory();
 
@@ -148,10 +151,11 @@ showHistory();
 
 
 
-
 function showHistory(){
 
 let list=document.getElementById("historyList");
+
+if(!list)return;
 
 
 let h=
@@ -166,7 +170,6 @@ list.innerHTML=h.reverse()
 
 
 
-
 function clearHistory(){
 
 localStorage.removeItem("history");
@@ -177,12 +180,40 @@ showHistory();
 
 
 
-document.getElementById("theme").onclick=()=>{
 
-document.body.classList.toggle("light");
+function showPage(page){
 
-};
+document
+.querySelectorAll("section")
+.forEach(x=>x.classList.add("hide"));
 
+
+document.getElementById(page)
+.classList.remove("hide");
+
+
+showHistory();
+
+}
+
+
+
+function toggleTheme(){
+
+document.body.style.background=
+document.body.style.background=="white"
+?"black"
+:"white";
+
+}
+
+
+
+function toggleSound(){
+
+sound=!sound;
+
+}
 
 
 
