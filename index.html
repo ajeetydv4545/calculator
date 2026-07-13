@@ -1,82 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Scientific Calculator</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
 
 
-<div class="container">
+body{
+
+height:100vh;
+background:#111;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
 
 
-<div class="calculator">
+.calculator{
 
-<input id="display" readonly>
+width:380px;
+background:#222;
+padding:20px;
+border-radius:25px;
+box-shadow:0 0 30px black;
 
-
-<div class="history">
-<h3>History</h3>
-<div id="historyList"></div>
-<button onclick="clearHistory()">Clear History</button>
-</div>
-
+}
 
 
-<div class="buttons">
+#display{
+
+width:100%;
+height:80px;
+background:black;
+color:white;
+font-size:35px;
+text-align:right;
+padding:15px;
+border:none;
+border-radius:15px;
+margin-bottom:15px;
+
+}
 
 
-<button class="special" onclick="clearDisplay()">AC</button>
-<button class="special" onclick="deleteLast()">DEL</button>
-<button onclick="appendValue('%')">%</button>
-<button onclick="appendValue('/')">÷</button>
+
+.buttons{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+
+}
 
 
-<button onclick="scientific('sin')">sin</button>
-<button onclick="scientific('cos')">cos</button>
-<button onclick="scientific('tan')">tan</button>
-<button onclick="scientific('sqrt')">√</button>
+button{
+
+height:60px;
+border-radius:50%;
+border:none;
+font-size:20px;
+cursor:pointer;
+background:#333;
+color:white;
+transition:.2s;
+
+}
 
 
-<button onclick="appendValue('7')">7</button>
-<button onclick="appendValue('8')">8</button>
-<button onclick="appendValue('9')">9</button>
-<button onclick="appendValue('*')">×</button>
+button:active{
+
+transform:scale(.9);
+
+}
 
 
-<button onclick="appendValue('4')">4</button>
-<button onclick="appendValue('5')">5</button>
-<button onclick="appendValue('6')">6</button>
-<button onclick="appendValue('-')">−</button>
+button:hover{
+
+background:#555;
+
+}
 
 
-<button onclick="appendValue('1')">1</button>
-<button onclick="appendValue('2')">2</button>
-<button onclick="appendValue('3')">3</button>
-<button onclick="appendValue('+')">+</button>
+.special{
+
+background:#ff9500;
+
+}
 
 
-<button onclick="appendValue('0')">0</button>
-<button onclick="appendValue('.')">.</button>
-<button onclick="appendValue(Math.PI)">π</button>
-<button class="equal" onclick="calculate()">=</button>
+.equal{
+
+background:#34c759;
+
+}
 
 
-</div>
 
-</div>
+.history{
+
+color:white;
+margin-bottom:15px;
+}
 
 
-</div>
+#historyList{
+
+max-height:100px;
+overflow:auto;
+font-size:14px;
+
+}
 
 
-<script src="script.js"></script>
+.history button{
 
-</body>
-</html>
+height:35px;
+border-radius:10px;
+margin-top:5px;
+background:#444;
+
+}
+
+
+
+@media(max-width:500px){
+
+.calculator{
+
+width:95%;
+height:auto;
+
+}
+
+
+button{
+
+height:65px;
+
+}
+
+
+}
