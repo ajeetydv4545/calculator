@@ -31,11 +31,16 @@ function calculate(){
 
 try{
 
-let result=eval(display.value);
+let expression=display.value;
 
-saveHistory(display.value+" = "+result);
+let result=eval(expression);
+
+
+saveHistory(expression+" = "+result);
+
 
 display.value=result;
+
 
 }
 
@@ -46,61 +51,8 @@ display.value="Error";
 }
 
 }
-function square(){
-
-let value=Number(display.value);
-
-display.value=value*value;
-
-}
 
 
-
-function cube(){
-
-let value=Number(display.value);
-
-display.value=value*value*value;
-
-}
-
-
-
-function power(){
-
-let base=Number(display.value);
-
-let exponent=prompt("Power value:");
-
-display.value=Math.pow(base,exponent);
-
-}
-
-
-
-
-function toggleTheme(){
-
-document.body.classList.toggle("light");
-
-
-let mode=document.body.classList.contains("light");
-
-
-localStorage.setItem(
-"theme",
-mode?"light":"dark"
-);
-
-}
-
-
-
-if(localStorage.getItem("theme")==="light"){
-
-document.body.classList.add("light");
-
-}
 
 
 
@@ -119,13 +71,11 @@ display.value=Math.sin(value*Math.PI/180);
 break;
 
 
-
 case "cos":
 
 display.value=Math.cos(value*Math.PI/180);
 
 break;
-
 
 
 case "tan":
@@ -159,9 +109,47 @@ display.value=Math.log(value);
 break;
 
 
-}
 
 }
+
+
+}
+
+
+
+
+
+function square(){
+
+let value=Number(display.value);
+
+display.value=value*value;
+
+}
+
+
+
+function cube(){
+
+let value=Number(display.value);
+
+display.value=value*value*value;
+
+}
+
+
+
+
+function power(){
+
+let base=Number(display.value);
+
+let exp=prompt("Enter power");
+
+display.value=Math.pow(base,exp);
+
+}
+
 
 
 
@@ -186,9 +174,11 @@ showHistory();
 
 
 
+
 function showHistory(){
 
 let list=document.getElementById("historyList");
+
 
 let history=
 JSON.parse(localStorage.getItem("history")) || [];
@@ -199,13 +189,16 @@ list.innerHTML="";
 
 history.reverse().forEach(item=>{
 
+
 list.innerHTML+=
 `<p>${item}</p>`;
+
 
 });
 
 
 }
+
 
 
 
@@ -219,6 +212,37 @@ showHistory();
 
 
 
+
+
+function toggleTheme(){
+
+document.body.classList.toggle("light");
+
+
+let theme=
+document.body.classList.contains("light")
+?"light":"dark";
+
+
+localStorage.setItem(
+"theme",
+theme
+);
+
+
+}
+
+
+
+
+if(localStorage.getItem("theme")=="light"){
+
+document.body.classList.add("light");
+
+}
+
+
+
 showHistory();
 
 
@@ -227,28 +251,43 @@ showHistory();
 
 document.addEventListener(
 "keydown",
-function(e){
+(e)=>{
 
 
 if(
 (e.key>="0" && e.key<="9")
 ||
 "+-*/.".includes(e.key)
-)
+){
 
 appendValue(e.key);
 
+}
 
 
-if(e.key==="Enter")
+
+if(e.key=="Enter"){
+
 calculate();
 
+}
 
 
-if(e.key==="Backspace")
+
+if(e.key=="Backspace"){
+
 deleteLast();
 
+}
 
+
+
+if(e.key=="Escape"){
+
+clearDisplay();
 
 }
-);
+
+
+
+});
