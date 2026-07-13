@@ -8,22 +8,10 @@ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
 }
 
 
-
 body{
 
 background:#000;
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
 color:white;
-
-transition:.3s;
 
 }
 
@@ -32,58 +20,32 @@ transition:.3s;
 .app{
 
 width:390px;
-
+margin:auto;
+min-height:100vh;
 padding:20px;
+padding-bottom:90px;
 
 }
 
 
 
-.top{
+header{
 
-position:relative;
-
-margin-bottom:15px;
+margin-bottom:20px;
 
 }
 
 
+header h1{
 
-.top h1{
-
-font-size:30px;
+font-size:32px;
 
 }
 
 
-
-.top p{
+header p{
 
 color:#888;
-
-}
-
-
-
-#theme{
-
-position:absolute;
-
-right:0;
-
-top:0;
-
-width:45px;
-
-height:45px;
-
-border-radius:50%;
-
-background:#333;
-
-color:white;
-
-border:none;
 
 }
 
@@ -99,13 +61,10 @@ text-align:right;
 
 
 
-#history{
-
-height:30px;
+#previous{
 
 color:#888;
-
-font-size:18px;
+height:30px;
 
 }
 
@@ -115,15 +74,13 @@ font-size:18px;
 
 width:100%;
 
+font-size:45px;
+
 background:none;
 
 border:none;
 
-outline:none;
-
 color:white;
-
-font-size:45px;
 
 text-align:right;
 
@@ -131,7 +88,8 @@ text-align:right;
 
 
 
-.scientific{
+.scientific,
+.buttons{
 
 display:grid;
 
@@ -145,18 +103,6 @@ margin-bottom:15px;
 
 
 
-.buttons{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:12px;
-
-}
-
-
-
 button{
 
 height:60px;
@@ -165,11 +111,11 @@ border:none;
 
 border-radius:50%;
 
-font-size:20px;
-
 background:#333;
 
 color:white;
+
+font-size:20px;
 
 }
 
@@ -183,7 +129,7 @@ transform:scale(.9);
 
 
 
-.operator,.equal{
+.orange{
 
 background:#ff9500;
 
@@ -191,7 +137,7 @@ background:#ff9500;
 
 
 
-.function{
+.gray{
 
 background:#aaa;
 
@@ -207,23 +153,45 @@ grid-column:span 2;
 
 border-radius:40px;
 
-text-align:left;
+}
 
-padding-left:25px;
+
+
+nav{
+
+position:fixed;
+
+bottom:0;
+
+width:390px;
+
+background:#111;
+
+display:flex;
+
+justify-content:space-around;
+
+padding:10px;
 
 }
 
 
 
-.history-box{
+nav button{
 
-margin-top:20px;
+background:none;
 
-background:#111;
+height:50px;
 
-padding:15px;
+font-size:14px;
 
-border-radius:15px;
+}
+
+
+
+.hide{
+
+display:none;
 
 }
 
@@ -231,36 +199,34 @@ border-radius:15px;
 
 #historyList{
 
-max-height:120px;
-
-overflow:auto;
+margin-top:20px;
 
 }
 
 
 
-body.light{
+.setting{
 
-background:#eee;
+background:#222;
 
-color:black;
+padding:15px;
+
+border-radius:15px;
+
+margin:15px 0;
+
+display:flex;
+
+justify-content:space-between;
 
 }
 
 
 
-body.light #display{
+.version{
 
-color:black;
+color:#888;
 
-}
-
-
-
-body.light button{
-
-color:black;
-
-background:#ddd;
+margin-top:40px;
 
 }
