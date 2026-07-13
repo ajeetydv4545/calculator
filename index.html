@@ -18,11 +18,13 @@
 <div class="app">
 
 
-<div class="brand">
+<div class="top">
 
-<h2>NovaCalc</h2>
+<h1>NovaCalc</h1>
 
 <p>Scientific Calculator</p>
+
+<button id="theme">🌙</button>
 
 </div>
 
@@ -33,7 +35,7 @@
 
 <div class="display-box">
 
-<div id="previous"></div>
+<div id="history"></div>
 
 <input id="display" readonly>
 
@@ -41,36 +43,73 @@
 
 
 
+<div class="scientific">
+
+
+<button onclick="scientific('sin')">sin</button>
+<button onclick="scientific('cos')">cos</button>
+<button onclick="scientific('tan')">tan</button>
+<button onclick="scientific('sqrt')">√</button>
+
+<button onclick="scientific('log')">log</button>
+<button onclick="scientific('ln')">ln</button>
+<button onclick="square()">x²</button>
+<button onclick="power()">xʸ</button>
+
+</div>
+
+
+
+
 <div class="buttons">
 
 
-<button class="function">AC</button>
-<button class="function">±</button>
-<button class="function">%</button>
-<button class="operator">÷</button>
+<button class="function" onclick="clearDisplay()">AC</button>
+
+<button class="function" onclick="deleteLast()">DEL</button>
+
+<button class="function" onclick="append('%')">%</button>
+
+<button class="operator" onclick="append('/')">÷</button>
 
 
-<button>7</button>
-<button>8</button>
-<button>9</button>
-<button class="operator">×</button>
+
+<button onclick="append('7')">7</button>
+
+<button onclick="append('8')">8</button>
+
+<button onclick="append('9')">9</button>
+
+<button class="operator" onclick="append('*')">×</button>
 
 
-<button>4</button>
-<button>5</button>
-<button>6</button>
-<button class="operator">−</button>
+
+<button onclick="append('4')">4</button>
+
+<button onclick="append('5')">5</button>
+
+<button onclick="append('6')">6</button>
+
+<button class="operator" onclick="append('-')">−</button>
 
 
-<button>1</button>
-<button>2</button>
-<button>3</button>
-<button class="operator">+</button>
+
+<button onclick="append('1')">1</button>
+
+<button onclick="append('2')">2</button>
+
+<button onclick="append('3')">3</button>
+
+<button class="operator" onclick="append('+')">+</button>
 
 
-<button class="zero">0</button>
-<button>.</button>
-<button class="equal">=</button>
+
+<button class="zero" onclick="append('0')">0</button>
+
+<button onclick="append('.')">.</button>
+
+<button class="equal" onclick="calculate()">=</button>
+
 
 
 </div>
@@ -79,7 +118,20 @@
 </div>
 
 
+
+<div class="history-box">
+
+<h3>Calculation History</h3>
+
+<div id="historyList"></div>
+
+<button onclick="clearHistory()">Clear History</button>
+
 </div>
+
+
+</div>
+
 
 
 <script src="script.js"></script>
