@@ -1,40 +1,51 @@
-const display=document.getElementById("display");
+let display=document.getElementById("display");
 
-
-const previous=document.getElementById("previous");
-
-
-let buttons=document.querySelectorAll("button");
+let historyText=document.getElementById("history");
 
 
 
-buttons.forEach(button=>{
+function append(value){
 
-
-button.onclick=()=>{
-
-
-let value=button.innerText;
-
-
-
-if(value==="AC"){
-
-display.value="";
-
-previous.innerHTML="";
+display.value+=value;
 
 }
 
 
 
-else if(value==="="){
+function clearDisplay(){
+
+display.value="";
+
+}
+
+
+
+function deleteLast(){
+
+display.value=
+display.value.slice(0,-1);
+
+}
+
+
+
+function calculate(){
 
 try{
 
-previous.innerHTML=display.value;
+let exp=display.value;
 
-display.value=eval(display.value);
+let result=eval(exp);
+
+
+historyText.innerHTML=exp;
+
+
+saveHistory(exp+" = "+result);
+
+
+display.value=result;
+
 
 }
 
@@ -48,47 +59,131 @@ display.value="Error";
 
 
 
-else if(value==="×"){
 
-display.value+="*";
+function scientific(type){
+
+let value=Number(display.value);
+
+
+
+if(type=="sin")
+
+display.value=Math.sin(value*Math.PI/180);
+
+
+
+if(type=="cos")
+
+display.value=Math.cos(value*Math.PI/180);
+
+
+
+if(type=="tan")
+
+display.value=Math.tan(value*Math.PI/180);
+
+
+
+if(type=="sqrt")
+
+display.value=Math.sqrt(value);
+
+
+
+if(type=="log")
+
+display.value=Math.log10(value);
+
+
+
+if(type=="ln")
+
+display.value=Math.log(value);
+
 
 }
 
 
 
-else if(value==="÷"){
-
-display.value+="/";
-
-}
-
-
-
-else if(value==="−"){
-
-display.value+="-";
-
-}
-
-
-
-else if(value==="±"){
+function square(){
 
 display.value=
-display.value * -1;
+Number(display.value)**2;
 
 }
 
 
 
-else{
+function power(){
 
-display.value+=value;
+let p=prompt("Power");
+
+display.value=
+Math.pow(display.value,p);
 
 }
 
 
+
+
+
+function saveHistory(data){
+
+let h=
+JSON.parse(localStorage.getItem("history"))||[];
+
+
+h.push(data);
+
+
+localStorage.setItem(
+"history",
+JSON.stringify(h)
+);
+
+
+showHistory();
+
 }
 
 
-});
+
+
+function showHistory(){
+
+let list=document.getElementById("historyList");
+
+
+let h=
+JSON.parse(localStorage.getItem("history"))||[];
+
+
+list.innerHTML=h.reverse()
+.map(x=>`<p>${x}</p>`)
+.join("");
+
+}
+
+
+
+
+function clearHistory(){
+
+localStorage.removeItem("history");
+
+showHistory();
+
+}
+
+
+
+document.getElementById("theme").onclick=()=>{
+
+document.body.classList.toggle("light");
+
+};
+
+
+
+
+showHistory();
