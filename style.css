@@ -142,3 +142,61 @@ height:65px;
 
 
 }
+body.light{
+
+background:#eeeeee;
+
+}
+
+
+body.light .calculator{
+
+background:white;
+
+}
+
+
+
+body.light #display{
+
+background:#ddd;
+
+color:black;
+
+}
+
+
+
+body.light button{
+
+background:#ddd;
+
+color:black;
+
+}
+
+
+
+.theme-btn{
+
+position:absolute;
+
+margin-top:-60px;
+
+background:#444;
+
+width:45px;
+
+height:45px;
+
+font-size:20px;
+
+}
+
+
+
+.container{
+
+position:relative;
+
+}
