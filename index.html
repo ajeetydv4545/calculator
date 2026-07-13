@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scientific Calculator</title>
+<title>NovaCalc</title>
 
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-
 
 </head>
 
@@ -18,26 +15,27 @@
 <body>
 
 
-<div class="container">
+<div class="app">
+
+
+<div class="brand">
+
+<h2>NovaCalc</h2>
+
+<p>Scientific Calculator</p>
+
+</div>
+
 
 
 <div class="calculator">
 
 
-<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<div class="display-box">
 
+<div id="previous"></div>
 
 <input id="display" readonly>
-
-
-
-<div class="history">
-
-<h3>History</h3>
-
-<div id="historyList"></div>
-
-<button onclick="clearHistory()">Clear</button>
 
 </div>
 
@@ -46,84 +44,33 @@
 <div class="buttons">
 
 
-<button class="special" onclick="clearDisplay()">AC</button>
-
-<button class="special" onclick="deleteLast()">DEL</button>
-
-<button onclick="appendValue('%')">%</button>
-
-<button onclick="appendValue('/')">÷</button>
+<button class="function">AC</button>
+<button class="function">±</button>
+<button class="function">%</button>
+<button class="operator">÷</button>
 
 
-
-<button onclick="scientific('sin')">sin</button>
-
-<button onclick="scientific('cos')">cos</button>
-
-<button onclick="scientific('tan')">tan</button>
-
-<button onclick="scientific('sqrt')">√</button>
+<button>7</button>
+<button>8</button>
+<button>9</button>
+<button class="operator">×</button>
 
 
-
-<button onclick="scientific('log')">log</button>
-
-<button onclick="scientific('ln')">ln</button>
-
-<button onclick="square()">x²</button>
-
-<button onclick="cube()">x³</button>
+<button>4</button>
+<button>5</button>
+<button>6</button>
+<button class="operator">−</button>
 
 
-
-<button onclick="power()">xʸ</button>
-
-<button onclick="appendValue(Math.PI)">π</button>
-
-<button onclick="appendValue(Math.E)">e</button>
-
-<button onclick="appendValue('*')">×</button>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button class="operator">+</button>
 
 
-
-<button onclick="appendValue('7')">7</button>
-
-<button onclick="appendValue('8')">8</button>
-
-<button onclick="appendValue('9')">9</button>
-
-<button onclick="appendValue('-')">−</button>
-
-
-
-<button onclick="appendValue('4')">4</button>
-
-<button onclick="appendValue('5')">5</button>
-
-<button onclick="appendValue('6')">6</button>
-
-<button onclick="appendValue('+')">+</button>
-
-
-
-<button onclick="appendValue('1')">1</button>
-
-<button onclick="appendValue('2')">2</button>
-
-<button onclick="appendValue('3')">3</button>
-
-<button class="equal" onclick="calculate()">=</button>
-
-
-
-<button class="zero" onclick="appendValue('0')">
-0
-</button>
-
-
-<button onclick="appendValue('.')">
-.
-</button>
+<button class="zero">0</button>
+<button>.</button>
+<button class="equal">=</button>
 
 
 </div>
