@@ -4,9 +4,38 @@ const previous = document.getElementById("previous");
 let sound = true;
 
 
-// =======================
-// BASIC FUNCTIONS
-// =======================
+// =====================
+// BUTTON FEEDBACK
+// =====================
+
+function buttonFeedback(){
+
+    // Mobile vibration
+    if(navigator.vibrate){
+
+        navigator.vibrate(50);
+
+    }
+
+
+    // Button sound
+    if(sound){
+
+        let audio = new Audio(
+            "https://www.soundjay.com/buttons/sounds/button-16.mp3"
+        );
+
+        audio.play().catch(()=>{});
+
+    }
+
+}
+
+
+
+// =====================
+// BASIC CALCULATOR
+// =====================
 
 
 function append(value){
@@ -19,6 +48,7 @@ function append(value){
 
 
 
+
 function clearDisplay(){
 
     buttonFeedback();
@@ -28,6 +58,8 @@ function clearDisplay(){
     previous.innerHTML = "";
 
 }
+
+
 
 
 
@@ -71,7 +103,6 @@ function calculate(){
         );
 
 
-
     }
 
     catch{
@@ -84,9 +115,11 @@ function calculate(){
 
 
 
-// =======================
+
+
+// =====================
 // SCIENTIFIC FUNCTIONS
-// =======================
+// =====================
 
 
 function scientific(type){
@@ -162,14 +195,17 @@ function scientific(type){
 
 
 
+
 function square(){
 
     buttonFeedback();
+
 
     display.value =
     Number(display.value) ** 2;
 
 }
+
 
 
 
@@ -183,14 +219,15 @@ function power(){
     prompt("Enter power");
 
 
-
     if(exponent !== null){
+
 
         display.value =
         Math.pow(
             Number(display.value),
             Number(exponent)
         );
+
 
     }
 
@@ -200,9 +237,10 @@ function power(){
 
 
 
-// =======================
-// HISTORY SYSTEM
-// =======================
+
+// =====================
+// HISTORY
+// =====================
 
 
 
@@ -226,10 +264,11 @@ function saveHistory(data){
     );
 
 
-
     showHistory();
 
+
 }
+
 
 
 
@@ -242,8 +281,7 @@ function showHistory(){
 
 
 
-    if(!list)
-    return;
+    if(!list) return;
 
 
 
@@ -271,7 +309,6 @@ function showHistory(){
     });
 
 
-
 }
 
 
@@ -279,6 +316,9 @@ function showHistory(){
 
 
 function clearHistory(){
+
+
+    buttonFeedback();
 
 
     localStorage.removeItem("history");
@@ -293,14 +333,16 @@ function clearHistory(){
 
 
 
-
-
-// =======================
+// =====================
 // PAGE NAVIGATION
-// =======================
+// =====================
 
 
 function showPage(page){
+
+
+    buttonFeedback();
+
 
 
     document
@@ -334,13 +376,15 @@ function showPage(page){
 
 
 
-
-// =======================
+// =====================
 // THEME
-// =======================
+// =====================
 
 
 function toggleTheme(){
+
+
+    buttonFeedback();
 
 
     document.body.classList.toggle("light");
@@ -365,12 +409,8 @@ function toggleTheme(){
 
 
 
-// Load saved theme
-
 if(
-    localStorage.getItem("theme")
-    ===
-    "light"
+localStorage.getItem("theme")==="light"
 ){
 
     document.body.classList.add("light");
@@ -381,14 +421,15 @@ if(
 
 
 
-
-
-// =======================
-// SOUND + VIBRATION
-// =======================
+// =====================
+// SOUND CONTROL
+// =====================
 
 
 function toggleSound(){
+
+    buttonFeedback();
+
 
     sound = !sound;
 
@@ -397,43 +438,10 @@ function toggleSound(){
 
 
 
-function buttonFeedback(){
 
-
-    if(sound){
-
-
-        let audio =
-        new Audio(
-        "https://www.soundjay.com/buttons/sounds/button-16.mp3"
-        );
-
-
-        audio.play()
-        .catch(()=>{});
-
-
-    }
-
-
-
-    if(navigator.vibrate){
-
-        navigator.vibrate(30);
-
-    }
-
-
-}
-
-
-
-
-
-
-// =======================
+// =====================
 // KEYBOARD SUPPORT
-// =======================
+// =====================
 
 
 document.addEventListener(
@@ -455,6 +463,7 @@ function(e){
 
 
 
+
     if(e.key==="Enter"){
 
         calculate();
@@ -463,11 +472,13 @@ function(e){
 
 
 
+
     if(e.key==="Backspace"){
 
         deleteLast();
 
     }
+
 
 
 
