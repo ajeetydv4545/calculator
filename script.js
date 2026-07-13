@@ -1,62 +1,69 @@
-let display = document.getElementById("display");
+const display = document.getElementById("display");
+const previous = document.getElementById("previous");
 
 let sound = true;
 
 
-// Button feedback
-function clickEffect(){
-
-    if(sound){
-        // sound optional hai, error avoid karne ke liye
-        let audio = new Audio(
-            "https://www.soundjay.com/buttons/sounds/button-16.mp3"
-        );
-
-        audio.play().catch(()=>{});
-    }
+// =======================
+// BASIC FUNCTIONS
+// =======================
 
 
-    if(navigator.vibrate){
-        navigator.vibrate(30);
-    }
-
-}
-
-
-// Add value
 function append(value){
 
-    clickEffect();
+    buttonFeedback();
 
     display.value += value;
 
 }
 
 
-// Clear
+
 function clearDisplay(){
+
+    buttonFeedback();
 
     display.value = "";
 
+    previous.innerHTML = "";
+
 }
 
 
-// Delete last
+
 function deleteLast(){
 
-    display.value = display.value.slice(0,-1);
+    buttonFeedback();
+
+    display.value =
+    display.value.slice(0,-1);
 
 }
 
 
-// Calculate
+
+
 function calculate(){
+
+    buttonFeedback();
+
 
     try{
 
         let expression = display.value;
 
+
         let result = eval(expression);
+
+
+
+        previous.innerHTML =
+        expression;
+
+
+
+        display.value = result;
+
 
 
         saveHistory(
@@ -64,10 +71,9 @@ function calculate(){
         );
 
 
-        display.value = result;
-
 
     }
+
     catch{
 
         display.value = "Error";
@@ -77,11 +83,20 @@ function calculate(){
 }
 
 
-// Scientific functions
+
+// =======================
+// SCIENTIFIC FUNCTIONS
+// =======================
+
 
 function scientific(type){
 
+
+    buttonFeedback();
+
+
     let value = Number(display.value);
+
 
 
     switch(type){
@@ -139,14 +154,17 @@ function scientific(type){
 
             break;
 
+
     }
 
 }
 
 
 
-// Square
+
 function square(){
+
+    buttonFeedback();
 
     display.value =
     Number(display.value) ** 2;
@@ -155,27 +173,51 @@ function square(){
 
 
 
-// Power
+
 function power(){
 
-    let p = prompt("Enter power");
+    buttonFeedback();
 
-    display.value =
-    Math.pow(Number(display.value), Number(p));
+
+    let exponent =
+    prompt("Enter power");
+
+
+
+    if(exponent !== null){
+
+        display.value =
+        Math.pow(
+            Number(display.value),
+            Number(exponent)
+        );
+
+    }
 
 }
 
 
 
-// History save
+
+
+// =======================
+// HISTORY SYSTEM
+// =======================
+
+
 
 function saveHistory(data){
 
+
     let history =
-    JSON.parse(localStorage.getItem("history")) || [];
+    JSON.parse(
+        localStorage.getItem("history")
+    ) || [];
+
 
 
     history.push(data);
+
 
 
     localStorage.setItem(
@@ -184,64 +226,93 @@ function saveHistory(data){
     );
 
 
+
     showHistory();
 
 }
 
 
 
-// Show history
 
 function showHistory(){
+
 
     let list =
     document.getElementById("historyList");
 
 
-    if(!list) return;
+
+    if(!list)
+    return;
+
 
 
     let history =
-    JSON.parse(localStorage.getItem("history")) || [];
+    JSON.parse(
+        localStorage.getItem("history")
+    ) || [];
+
 
 
     list.innerHTML = "";
 
 
-    history.reverse().forEach(item=>{
+
+    history
+    .slice()
+    .reverse()
+    .forEach(item=>{
+
 
         list.innerHTML +=
         `<p>${item}</p>`;
 
+
     });
+
+
 
 }
 
 
 
-// Clear history
+
 
 function clearHistory(){
 
+
     localStorage.removeItem("history");
 
+
     showHistory();
+
 
 }
 
 
 
-// Page navigation
+
+
+
+
+// =======================
+// PAGE NAVIGATION
+// =======================
+
 
 function showPage(page){
+
 
     document
     .querySelectorAll("section")
     .forEach(section=>{
 
+
         section.classList.add("hide");
 
+
     });
+
 
 
     document
@@ -249,29 +320,168 @@ function showPage(page){
     .classList.remove("hide");
 
 
-    showHistory();
+
+    if(page==="historyPage"){
+
+        showHistory();
+
+    }
+
 
 }
 
 
 
-// Theme
+
+
+
+// =======================
+// THEME
+// =======================
+
 
 function toggleTheme(){
 
+
     document.body.classList.toggle("light");
+
+
+
+    localStorage.setItem(
+
+        "theme",
+
+        document.body.classList.contains("light")
+        ?
+        "light"
+        :
+        "dark"
+
+    );
+
 
 }
 
 
 
-// Sound
+
+// Load saved theme
+
+if(
+    localStorage.getItem("theme")
+    ===
+    "light"
+){
+
+    document.body.classList.add("light");
+
+}
+
+
+
+
+
+
+
+// =======================
+// SOUND + VIBRATION
+// =======================
+
 
 function toggleSound(){
 
     sound = !sound;
 
 }
+
+
+
+
+function buttonFeedback(){
+
+
+    if(sound){
+
+
+        let audio =
+        new Audio(
+        "https://www.soundjay.com/buttons/sounds/button-16.mp3"
+        );
+
+
+        audio.play()
+        .catch(()=>{});
+
+
+    }
+
+
+
+    if(navigator.vibrate){
+
+        navigator.vibrate(30);
+
+    }
+
+
+}
+
+
+
+
+
+
+// =======================
+// KEYBOARD SUPPORT
+// =======================
+
+
+document.addEventListener(
+"keydown",
+function(e){
+
+
+
+    if(
+        (e.key >= "0" && e.key <= "9")
+        ||
+        "+-*/.".includes(e.key)
+
+    ){
+
+        append(e.key);
+
+    }
+
+
+
+    if(e.key==="Enter"){
+
+        calculate();
+
+    }
+
+
+
+    if(e.key==="Backspace"){
+
+        deleteLast();
+
+    }
+
+
+
+    if(e.key==="Escape"){
+
+        clearDisplay();
+
+    }
+
+
+
+});
+
+
 
 
 
