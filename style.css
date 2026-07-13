@@ -1,17 +1,21 @@
 *{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
-
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 
 body{
 
-background:#000;
-color:white;
+    min-height:100vh;
+    background:#000;
+    color:white;
+
+    display:flex;
+    justify-content:center;
+
+    transition:0.3s;
 
 }
 
@@ -19,11 +23,11 @@ color:white;
 
 .app{
 
-width:390px;
-margin:auto;
-min-height:100vh;
-padding:20px;
-padding-bottom:90px;
+    width:390px;
+    min-height:100vh;
+
+    padding:20px;
+    padding-bottom:100px;
 
 }
 
@@ -31,31 +35,42 @@ padding-bottom:90px;
 
 header{
 
-margin-bottom:20px;
+    margin-bottom:20px;
 
 }
+
 
 
 header h1{
 
-font-size:32px;
+    font-size:32px;
 
 }
+
 
 
 header p{
 
-color:#888;
+    color:#888;
+    font-size:15px;
 
 }
 
 
 
+
+/* Display */
+
 .display-box{
 
-height:120px;
+    height:130px;
 
-text-align:right;
+    display:flex;
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    margin-bottom:15px;
 
 }
 
@@ -63,8 +78,13 @@ text-align:right;
 
 #previous{
 
-color:#888;
-height:30px;
+    height:30px;
+
+    color:#888;
+
+    font-size:18px;
+
+    text-align:right;
 
 }
 
@@ -72,161 +92,326 @@ height:30px;
 
 #display{
 
-width:100%;
+    width:100%;
 
-font-size:45px;
+    background:none;
 
-background:none;
+    border:none;
 
-border:none;
+    outline:none;
 
-color:white;
+    color:white;
 
-text-align:right;
+    font-size:45px;
+
+    text-align:right;
 
 }
 
 
 
-.scientific,
+
+
+/* Scientific buttons */
+
+.scientific{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+
+/* Main buttons */
+
 .buttons{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
 
-gap:10px;
-
-margin-bottom:15px;
+    gap:12px;
 
 }
+
 
 
 
 button{
 
-height:60px;
+    height:60px;
 
-border:none;
+    border:none;
 
-border-radius:50%;
+    border-radius:50%;
 
-background:#333;
+    background:#333;
 
-color:white;
+    color:white;
 
-font-size:20px;
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:0.15s;
 
 }
+
 
 
 
 button:active{
 
-transform:scale(.9);
+    transform:scale(0.9);
 
 }
+
+
 
 
 
 .orange{
 
-background:#ff9500;
+    background:#ff9500;
+
+    color:white;
 
 }
+
+
 
 
 
 .gray{
 
-background:#aaa;
+    background:#a5a5a5;
 
-color:black;
+    color:black;
 
 }
+
+
 
 
 
 .zero{
 
-grid-column:span 2;
+    grid-column:span 2;
 
-border-radius:40px;
+    border-radius:40px;
+
+    text-align:left;
+
+    padding-left:25px;
 
 }
 
 
+
+
+
+
+/* History */
+
+#historyList{
+
+    margin-top:20px;
+
+    max-height:300px;
+
+    overflow:auto;
+
+}
+
+
+
+#historyList p{
+
+    background:#222;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+}
+
+
+
+
+
+/* Settings */
+
+.setting{
+
+    background:#222;
+
+    padding:15px;
+
+    margin:15px 0;
+
+    border-radius:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.setting button{
+
+    height:40px;
+
+    width:80px;
+
+    border-radius:20px;
+
+}
+
+
+
+
+
+/* Bottom Navigation */
 
 nav{
 
-position:fixed;
+    position:fixed;
 
-bottom:0;
+    bottom:0;
 
-width:390px;
+    left:50%;
 
-background:#111;
+    transform:translateX(-50%);
 
-display:flex;
+    width:390px;
 
-justify-content:space-around;
+    background:#111;
 
-padding:10px;
+    display:flex;
+
+    justify-content:space-around;
+
+    padding:10px;
+
+    border-top:1px solid #333;
 
 }
+
 
 
 
 nav button{
 
-background:none;
+    background:none;
 
-height:50px;
+    height:55px;
 
-font-size:14px;
+    font-size:13px;
 
 }
 
 
+
+
+
+/* Hide pages */
 
 .hide{
 
-display:none;
+    display:none;
 
 }
 
 
 
-#historyList{
-
-margin-top:20px;
-
-}
 
 
+/* Light Theme */
 
-.setting{
+body.light{
 
-background:#222;
+    background:#eee;
 
-padding:15px;
-
-border-radius:15px;
-
-margin:15px 0;
-
-display:flex;
-
-justify-content:space-between;
+    color:#111;
 
 }
 
 
 
-.version{
+body.light #display{
 
-color:#888;
+    color:#111;
 
-margin-top:40px;
+}
+
+
+
+body.light .setting,
+
+body.light #historyList p{
+
+    background:white;
+
+    color:black;
+
+}
+
+
+
+body.light nav{
+
+    background:white;
+
+}
+
+
+
+body.light nav button{
+
+    color:black;
+
+}
+
+
+
+
+
+@media(max-width:450px){
+
+
+    .app{
+
+        width:95%;
+
+    }
+
+
+    nav{
+
+        width:100%;
+
+    }
+
+
+    button{
+
+        height:65px;
+
+    }
+
 
 }
