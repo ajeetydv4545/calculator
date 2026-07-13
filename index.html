@@ -18,6 +18,11 @@
 
 
 <div class="calculator">
+<div class="calculator">
+
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+
+<input id="display" readonly>
 
 <input id="display" readonly>
 
@@ -31,6 +36,17 @@
 
 
 <div class="buttons">
+<button onclick="scientific('log')">log</button>
+
+<button onclick="scientific('ln')">ln</button>
+
+<button onclick="square()">x²</button>
+
+<button onclick="cube()">x³</button>
+
+<button onclick="power()">xʸ</button>
+
+<button onclick="appendValue(Math.E)">e</button>
 
 
 <button class="special" onclick="clearDisplay()">AC</button>
