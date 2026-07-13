@@ -109,24 +109,59 @@ function scientific(type){
 let value=Number(display.value);
 
 
-if(type==="sin")
+switch(type){
+
+
+case "sin":
+
 display.value=Math.sin(value*Math.PI/180);
 
+break;
 
-if(type==="cos")
+
+
+case "cos":
+
 display.value=Math.cos(value*Math.PI/180);
 
+break;
 
-if(type==="tan")
+
+
+case "tan":
+
 display.value=Math.tan(value*Math.PI/180);
 
+break;
 
-if(type==="sqrt")
+
+
+case "sqrt":
+
 display.value=Math.sqrt(value);
+
+break;
+
+
+
+case "log":
+
+display.value=Math.log10(value);
+
+break;
+
+
+
+case "ln":
+
+display.value=Math.log(value);
+
+break;
 
 
 }
 
+}
 
 
 
