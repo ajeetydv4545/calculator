@@ -1,9 +1,10 @@
-const display = document.getElementById("display");
+const display=document.getElementById("display");
+
 
 
 function appendValue(value){
 
-    display.value += value;
+display.value += value;
 
 }
 
@@ -11,7 +12,7 @@ function appendValue(value){
 
 function clearDisplay(){
 
-    display.value="";
+display.value="";
 
 }
 
@@ -19,7 +20,8 @@ function clearDisplay(){
 
 function deleteLast(){
 
-    display.value = display.value.slice(0,-1);
+display.value=
+display.value.slice(0,-1);
 
 }
 
@@ -27,17 +29,21 @@ function deleteLast(){
 
 function calculate(){
 
-    try{
+try{
 
-        display.value = eval(display.value);
+let result=eval(display.value);
 
-    }
+saveHistory(display.value+" = "+result);
 
-    catch{
+display.value=result;
 
-        display.value="Error";
+}
 
-    }
+catch{
+
+display.value="Error";
+
+}
 
 }
 
@@ -45,92 +51,114 @@ function calculate(){
 
 function scientific(type){
 
-    let value = Number(display.value);
+let value=Number(display.value);
 
 
-    if(type==="sin"){
-
-        display.value = Math.sin(value * Math.PI / 180);
-
-    }
+if(type==="sin")
+display.value=Math.sin(value*Math.PI/180);
 
 
-    else if(type==="cos"){
-
-        display.value = Math.cos(value * Math.PI / 180);
-
-    }
+if(type==="cos")
+display.value=Math.cos(value*Math.PI/180);
 
 
-    else if(type==="tan"){
-
-        display.value = Math.tan(value * Math.PI / 180);
-
-    }
+if(type==="tan")
+display.value=Math.tan(value*Math.PI/180);
 
 
-    else if(type==="sqrt"){
+if(type==="sqrt")
+display.value=Math.sqrt(value);
 
-        display.value = Math.sqrt(value);
-
-    }
-
-
-    else if(type==="log"){
-
-        display.value = Math.log10(value);
-
-    }
 
 }
 
 
 
-function power(){
 
-    let value = Number(display.value);
+function saveHistory(data){
 
-    display.value = value * value;
+let history=
+JSON.parse(localStorage.getItem("history")) || [];
+
+
+history.push(data);
+
+
+localStorage.setItem(
+"history",
+JSON.stringify(history)
+);
+
+
+showHistory();
 
 }
 
 
 
-// Keyboard support
+function showHistory(){
 
-document.addEventListener("keydown",(e)=>{
+let list=document.getElementById("historyList");
 
-
-    if(
-        e.key >= "0" &&
-        e.key <= "9" ||
-        "+-*/.".includes(e.key)
-    ){
-
-        appendValue(e.key);
-
-    }
+let history=
+JSON.parse(localStorage.getItem("history")) || [];
 
 
-    if(e.key==="Enter"){
-
-        calculate();
-
-    }
+list.innerHTML="";
 
 
-    if(e.key==="Backspace"){
+history.reverse().forEach(item=>{
 
-        deleteLast();
-
-    }
-
-
-    if(e.key==="Escape"){
-
-        clearDisplay();
-
-    }
-
+list.innerHTML+=
+`<p>${item}</p>`;
 
 });
+
+
+}
+
+
+
+function clearHistory(){
+
+localStorage.removeItem("history");
+
+showHistory();
+
+}
+
+
+
+showHistory();
+
+
+
+
+
+document.addEventListener(
+"keydown",
+function(e){
+
+
+if(
+(e.key>="0" && e.key<="9")
+||
+"+-*/.".includes(e.key)
+)
+
+appendValue(e.key);
+
+
+
+if(e.key==="Enter")
+calculate();
+
+
+
+if(e.key==="Backspace")
+deleteLast();
+
+
+
+}
+);
