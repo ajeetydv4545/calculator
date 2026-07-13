@@ -18,24 +18,24 @@
 <div class="app">
 
 
-<div class="top">
+<header>
 
 <h1>NovaCalc</h1>
 
 <p>Scientific Calculator</p>
 
-<button id="theme">🌙</button>
-
-</div>
+</header>
 
 
 
-<div class="calculator">
+<!-- Calculator Page -->
+
+<section id="calculatorPage">
 
 
 <div class="display-box">
 
-<div id="history"></div>
+<div id="previous"></div>
 
 <input id="display" readonly>
 
@@ -44,7 +44,6 @@
 
 
 <div class="scientific">
-
 
 <button onclick="scientific('sin')">sin</button>
 <button onclick="scientific('cos')">cos</button>
@@ -63,75 +62,133 @@
 
 <div class="buttons">
 
-
-<button class="function" onclick="clearDisplay()">AC</button>
-
-<button class="function" onclick="deleteLast()">DEL</button>
-
-<button class="function" onclick="append('%')">%</button>
-
-<button class="operator" onclick="append('/')">÷</button>
-
+<button onclick="clearDisplay()" class="gray">AC</button>
+<button onclick="deleteLast()" class="gray">DEL</button>
+<button onclick="append('%')" class="gray">%</button>
+<button onclick="append('/')" class="orange">÷</button>
 
 
 <button onclick="append('7')">7</button>
-
 <button onclick="append('8')">8</button>
-
 <button onclick="append('9')">9</button>
-
-<button class="operator" onclick="append('*')">×</button>
-
+<button onclick="append('*')" class="orange">×</button>
 
 
 <button onclick="append('4')">4</button>
-
 <button onclick="append('5')">5</button>
-
 <button onclick="append('6')">6</button>
-
-<button class="operator" onclick="append('-')">−</button>
-
+<button onclick="append('-')" class="orange">−</button>
 
 
 <button onclick="append('1')">1</button>
-
 <button onclick="append('2')">2</button>
-
 <button onclick="append('3')">3</button>
-
-<button class="operator" onclick="append('+')">+</button>
-
+<button onclick="append('+')" class="orange">+</button>
 
 
-<button class="zero" onclick="append('0')">0</button>
-
+<button onclick="append('0')" class="zero">0</button>
 <button onclick="append('.')">.</button>
-
-<button class="equal" onclick="calculate()">=</button>
-
+<button onclick="calculate()" class="orange">=</button>
 
 
 </div>
 
 
-</div>
+</section>
 
 
 
-<div class="history-box">
+<!-- History Page -->
 
-<h3>Calculation History</h3>
+<section id="historyPage" class="hide">
+
+
+<h2>History</h2>
 
 <div id="historyList"></div>
 
-<button onclick="clearHistory()">Clear History</button>
+
+<button onclick="clearHistory()">
+Clear History
+</button>
+
+
+</section>
+
+
+
+
+<!-- Settings Page -->
+
+<section id="settingsPage" class="hide">
+
+
+<h2>Settings</h2>
+
+
+<div class="setting">
+
+Dark Mode
+
+<button onclick="toggleTheme()">
+Toggle
+</button>
 
 </div>
 
 
+
+<div class="setting">
+
+Button Sound
+
+<button onclick="toggleSound()">
+ON/OFF
+</button>
+
 </div>
 
+
+<p class="version">
+NovaCalc v1.3
+</p>
+
+
+</section>
+
+
+
+
+<!-- Bottom Navigation -->
+
+
+<nav>
+
+<button onclick="showPage('calculatorPage')">
+🧮
+<br>
+Calculator
+</button>
+
+
+<button onclick="showPage('historyPage')">
+📜
+<br>
+History
+</button>
+
+
+<button onclick="showPage('settingsPage')">
+⚙️
+<br>
+Settings
+</button>
+
+
+</nav>
+
+
+</div>
 
 
 <script src="script.js"></script>
