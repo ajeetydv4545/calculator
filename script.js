@@ -1,46 +1,40 @@
 const display=document.getElementById("display");
 
 
+const previous=document.getElementById("previous");
 
-function appendValue(value){
 
-display.value += value;
-
-}
+let buttons=document.querySelectorAll("button");
 
 
 
-function clearDisplay(){
+buttons.forEach(button=>{
+
+
+button.onclick=()=>{
+
+
+let value=button.innerText;
+
+
+
+if(value==="AC"){
 
 display.value="";
 
-}
-
-
-
-function deleteLast(){
-
-display.value=
-display.value.slice(0,-1);
+previous.innerHTML="";
 
 }
 
 
 
-function calculate(){
+else if(value==="="){
 
 try{
 
-let expression=display.value;
+previous.innerHTML=display.value;
 
-let result=eval(expression);
-
-
-saveHistory(expression+" = "+result);
-
-
-display.value=result;
-
+display.value=eval(display.value);
 
 }
 
@@ -54,256 +48,47 @@ display.value="Error";
 
 
 
+else if(value==="×"){
 
-
-function scientific(type){
-
-let value=Number(display.value);
-
-
-switch(type){
-
-
-case "sin":
-
-display.value=Math.sin(value*Math.PI/180);
-
-break;
-
-
-case "cos":
-
-display.value=Math.cos(value*Math.PI/180);
-
-break;
-
-
-case "tan":
-
-display.value=Math.tan(value*Math.PI/180);
-
-break;
-
-
-
-case "sqrt":
-
-display.value=Math.sqrt(value);
-
-break;
-
-
-
-case "log":
-
-display.value=Math.log10(value);
-
-break;
-
-
-
-case "ln":
-
-display.value=Math.log(value);
-
-break;
-
-
-
-}
-
+display.value+="*";
 
 }
 
 
 
+else if(value==="÷"){
 
-
-function square(){
-
-let value=Number(display.value);
-
-display.value=value*value;
+display.value+="/";
 
 }
 
 
 
-function cube(){
+else if(value==="−"){
 
-let value=Number(display.value);
-
-display.value=value*value*value;
+display.value+="-";
 
 }
 
 
 
+else if(value==="±"){
 
-function power(){
-
-let base=Number(display.value);
-
-let exp=prompt("Enter power");
-
-display.value=Math.pow(base,exp);
+display.value=
+display.value * -1;
 
 }
 
 
 
+else{
 
-function saveHistory(data){
-
-let history=
-JSON.parse(localStorage.getItem("history")) || [];
-
-
-history.push(data);
-
-
-localStorage.setItem(
-"history",
-JSON.stringify(history)
-);
-
-
-showHistory();
+display.value+=value;
 
 }
 
 
-
-
-function showHistory(){
-
-let list=document.getElementById("historyList");
-
-
-let history=
-JSON.parse(localStorage.getItem("history")) || [];
-
-
-list.innerHTML="";
-
-
-history.reverse().forEach(item=>{
-
-
-list.innerHTML+=
-`<p>${item}</p>`;
-
-
-});
-
-
 }
-
-
-
-
-function clearHistory(){
-
-localStorage.removeItem("history");
-
-showHistory();
-
-}
-
-
-
-
-
-function toggleTheme(){
-
-document.body.classList.toggle("light");
-
-
-let theme=
-document.body.classList.contains("light")
-?"light":"dark";
-
-
-localStorage.setItem(
-"theme",
-theme
-);
-
-
-}
-
-
-
-
-if(localStorage.getItem("theme")=="light"){
-
-document.body.classList.add("light");
-
-}
-
-
-
-showHistory();
-
-
-
-
-
-document.addEventListener(
-"keydown",
-(e)=>{
-
-
-if(
-(e.key>="0" && e.key<="9")
-||
-"+-*/.".includes(e.key)
-){
-
-appendValue(e.key);
-
-}
-
-
-
-if(e.key=="Enter"){
-
-calculate();
-
-}
-
-
-
-if(e.key=="Backspace"){
-
-deleteLast();
-
-}
-
-
-
-if(e.key=="Escape"){
-
-clearDisplay();
-
-}
-  if("serviceWorker" in navigator){
-
-window.addEventListener(
-"load",
-()=>{
-
-
-navigator.serviceWorker.register(
-"service-worker.js"
-);
-
-
-});
-
-
-}
-
 
 
 });
