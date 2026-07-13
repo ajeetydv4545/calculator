@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NovaCalc</title>
@@ -21,14 +22,11 @@
 <header>
 
 <h1>NovaCalc</h1>
-
 <p>Scientific Calculator</p>
 
 </header>
 
 
-
-<!-- Calculator Page -->
 
 <section id="calculatorPage">
 
@@ -62,33 +60,47 @@
 
 <div class="buttons">
 
-<button onclick="clearDisplay()" class="gray">AC</button>
-<button onclick="deleteLast()" class="gray">DEL</button>
-<button onclick="append('%')" class="gray">%</button>
-<button onclick="append('/')" class="orange">÷</button>
+
+<button class="gray" onclick="clearDisplay()">AC</button>
+
+<button class="gray" onclick="deleteLast()">DEL</button>
+
+<button class="gray" onclick="append('%')">%</button>
+
+<button class="orange" onclick="append('/')">÷</button>
+
 
 
 <button onclick="append('7')">7</button>
 <button onclick="append('8')">8</button>
 <button onclick="append('9')">9</button>
-<button onclick="append('*')" class="orange">×</button>
+
+<button class="orange" onclick="append('*')">×</button>
+
 
 
 <button onclick="append('4')">4</button>
 <button onclick="append('5')">5</button>
 <button onclick="append('6')">6</button>
-<button onclick="append('-')" class="orange">−</button>
+
+<button class="orange" onclick="append('-')">−</button>
+
 
 
 <button onclick="append('1')">1</button>
 <button onclick="append('2')">2</button>
 <button onclick="append('3')">3</button>
-<button onclick="append('+')" class="orange">+</button>
+
+<button class="orange" onclick="append('+')">+</button>
 
 
-<button onclick="append('0')" class="zero">0</button>
+
+<button class="zero" onclick="append('0')">0</button>
+
 <button onclick="append('.')">.</button>
-<button onclick="calculate()" class="orange">=</button>
+
+<button class="orange" onclick="calculate()">=</button>
+
 
 
 </div>
@@ -98,7 +110,6 @@
 
 
 
-<!-- History Page -->
 
 <section id="historyPage" class="hide">
 
@@ -118,8 +129,6 @@ Clear History
 
 
 
-<!-- Settings Page -->
-
 <section id="settingsPage" class="hide">
 
 
@@ -128,10 +137,10 @@ Clear History
 
 <div class="setting">
 
-Dark Mode
+<p>Theme</p>
 
 <button onclick="toggleTheme()">
-Toggle
+Change
 </button>
 
 </div>
@@ -140,7 +149,7 @@ Toggle
 
 <div class="setting">
 
-Button Sound
+<p>Sound</p>
 
 <button onclick="toggleSound()">
 ON/OFF
@@ -149,7 +158,8 @@ ON/OFF
 </div>
 
 
-<p class="version">
+
+<p>
 NovaCalc v1.3
 </p>
 
@@ -159,36 +169,45 @@ NovaCalc v1.3
 
 
 
-<!-- Bottom Navigation -->
-
 
 <nav>
 
+
 <button onclick="showPage('calculatorPage')">
+
 🧮
 <br>
 Calculator
+
 </button>
+
 
 
 <button onclick="showPage('historyPage')">
+
 📜
 <br>
 History
+
 </button>
+
 
 
 <button onclick="showPage('settingsPage')">
+
 ⚙️
 <br>
 Settings
+
 </button>
+
 
 
 </nav>
 
 
 </div>
+
 
 
 <script src="script.js"></script>
