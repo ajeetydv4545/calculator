@@ -287,6 +287,22 @@ if(e.key=="Escape"){
 clearDisplay();
 
 }
+  if("serviceWorker" in navigator){
+
+window.addEventListener(
+"load",
+()=>{
+
+
+navigator.serviceWorker.register(
+"service-worker.js"
+);
+
+
+});
+
+
+}
 
 
 
