@@ -1,217 +1,275 @@
-let display=document.getElementById("display");
+let display = document.getElementById("display");
 
-let sound=true;
+let sound = true;
 
 
-
+// Button feedback
 function clickEffect(){
 
-if(sound){
+    if(sound){
+        // sound optional hai, error avoid karne ke liye
+        let audio = new Audio(
+            "https://www.soundjay.com/buttons/sounds/button-16.mp3"
+        );
 
-let audio=new Audio(
-"https://www.soundjay.com/buttons/sounds/button-16.mp3"
-);
-
-audio.play();
-
-}
+        audio.play().catch(()=>{});
+    }
 
 
-if(navigator.vibrate){
-
-navigator.vibrate(30);
-
-}
+    if(navigator.vibrate){
+        navigator.vibrate(30);
+    }
 
 }
 
 
-
-
+// Add value
 function append(value){
 
-clickEffect();
+    clickEffect();
 
-display.value+=value;
+    display.value += value;
 
 }
 
 
-
-
+// Clear
 function clearDisplay(){
 
-display.value="";
+    display.value = "";
 
 }
 
 
-
+// Delete last
 function deleteLast(){
 
-display.value=
-display.value.slice(0,-1);
+    display.value = display.value.slice(0,-1);
 
 }
 
 
-
+// Calculate
 function calculate(){
 
-try{
+    try{
 
-let result=eval(display.value);
+        let expression = display.value;
 
-saveHistory(
-display.value+" = "+result
-);
+        let result = eval(expression);
 
-display.value=result;
 
+        saveHistory(
+            expression + " = " + result
+        );
+
+
+        display.value = result;
+
+
+    }
+    catch{
+
+        display.value = "Error";
+
+    }
 
 }
 
-catch{
 
-display.value="Error";
-
-}
-
-}
-
-
-
+// Scientific functions
 
 function scientific(type){
 
-let v=Number(display.value);
+    let value = Number(display.value);
 
 
-if(type=="sin")
-display.value=Math.sin(v*Math.PI/180);
+    switch(type){
 
 
-if(type=="cos")
-display.value=Math.cos(v*Math.PI/180);
+        case "sin":
+
+            display.value =
+            Math.sin(value * Math.PI / 180);
+
+            break;
 
 
-if(type=="tan")
-display.value=Math.tan(v*Math.PI/180);
+
+        case "cos":
+
+            display.value =
+            Math.cos(value * Math.PI / 180);
+
+            break;
 
 
-if(type=="sqrt")
-display.value=Math.sqrt(v);
+
+        case "tan":
+
+            display.value =
+            Math.tan(value * Math.PI / 180);
+
+            break;
 
 
-if(type=="log")
-display.value=Math.log10(v);
+
+        case "sqrt":
+
+            display.value =
+            Math.sqrt(value);
+
+            break;
 
 
-if(type=="ln")
-display.value=Math.log(v);
+
+        case "log":
+
+            display.value =
+            Math.log10(value);
+
+            break;
+
+
+
+        case "ln":
+
+            display.value =
+            Math.log(value);
+
+            break;
+
+    }
 
 }
 
 
 
-
+// Square
 function square(){
 
-display.value=display.value**2;
+    display.value =
+    Number(display.value) ** 2;
 
 }
 
 
 
+// Power
 function power(){
 
-let p=prompt("Power");
+    let p = prompt("Enter power");
 
-display.value=Math.pow(display.value,p);
+    display.value =
+    Math.pow(Number(display.value), Number(p));
 
 }
 
 
+
+// History save
 
 function saveHistory(data){
 
-let h=
-JSON.parse(localStorage.getItem("history"))||[];
+    let history =
+    JSON.parse(localStorage.getItem("history")) || [];
 
-h.push(data);
 
-localStorage.setItem(
-"history",
-JSON.stringify(h)
-);
+    history.push(data);
 
-showHistory();
+
+    localStorage.setItem(
+        "history",
+        JSON.stringify(history)
+    );
+
+
+    showHistory();
 
 }
 
 
+
+// Show history
 
 function showHistory(){
 
-let list=document.getElementById("historyList");
-
-if(!list)return;
-
-
-let h=
-JSON.parse(localStorage.getItem("history"))||[];
+    let list =
+    document.getElementById("historyList");
 
 
-list.innerHTML=h.reverse()
-.map(x=>`<p>${x}</p>`)
-.join("");
+    if(!list) return;
+
+
+    let history =
+    JSON.parse(localStorage.getItem("history")) || [];
+
+
+    list.innerHTML = "";
+
+
+    history.reverse().forEach(item=>{
+
+        list.innerHTML +=
+        `<p>${item}</p>`;
+
+    });
 
 }
 
 
+
+// Clear history
 
 function clearHistory(){
 
-localStorage.removeItem("history");
+    localStorage.removeItem("history");
 
-showHistory();
+    showHistory();
 
 }
 
 
 
+// Page navigation
 
 function showPage(page){
 
-document
-.querySelectorAll("section")
-.forEach(x=>x.classList.add("hide"));
+    document
+    .querySelectorAll("section")
+    .forEach(section=>{
+
+        section.classList.add("hide");
+
+    });
 
 
-document.getElementById(page)
-.classList.remove("hide");
+    document
+    .getElementById(page)
+    .classList.remove("hide");
 
 
-showHistory();
+    showHistory();
 
 }
 
 
+
+// Theme
 
 function toggleTheme(){
 
-document.body.style.background=
-document.body.style.background=="white"
-?"black"
-:"white";
+    document.body.classList.toggle("light");
 
 }
 
 
 
+// Sound
+
 function toggleSound(){
 
-sound=!sound;
+    sound = !sound;
 
 }
 
